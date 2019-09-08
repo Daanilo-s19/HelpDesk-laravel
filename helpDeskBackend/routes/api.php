@@ -23,29 +23,29 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //usuário
-route::group(['middleware' => ['auth']], function () {
-    route::get('/chamado', 'ChamadoController@chamados');
-    route::get('/logChamado/{id}/{alteracao}', 'ChamadoController@adicionarAlteracao');
-    route::get('/setor', 'AdminController@setor');
-    route::get('/cadastrarSetor', 'AdminController@cadastrarSetor');
-    route::get('/alterarSetor/{id}', 'AdminController@alterarSetor');
-    route::get('/removerSetor/{id}', 'AdminController@removerSetor');
-    route::get('/problemas', 'ProblemaController@listProblema');
-    route::get('/cadastrarProblema', 'GerenteController@cadastrarProblema');
-    route::get('/alterarProblema/{id}', 'GerenteController@alterarProblema');
-    route::get('/removerProblema/{id}', 'GerenteController@removerProblema');
-    route::get('/cadastrarGerente', 'AdminController@cadastrarGerente');
-    route::get('/alterarGerente/{id}', 'AdminController@alterarGerente');
-    route::get('/removerGerente/{id}', 'AdminController@removerGerente');
-    route::get('/tecnicos', 'TecnicoController@listTecnicos');
-    route::get('/cadastarTecnico', 'GerenteController@cadastrarTecnico');
-    route::get('/alterarTecnico/{id}', 'GerenteController@alterarTecnico');
-    route::get('/removerTecnico/{id}', 'GerenteController@removerTecnico');
-    route::get('/encaminharChamado/{id}', 'TecnicoController@encaminharChamado');
-    route::get('/alterarSituacao/{chamado}/{situacao}', 'TecnicoController@alterarSituacao');
-    route::get('/atenderChamado/{id}/{tecnico}', 'TecnicoController@atenderChamado');
-});
+route::get('/chamado', 'ChamadoController@chamados');
+route::get('/logChamado/{id}/{alteracao}', 'ChamadoController@adicionarAlteracao');
+route::get('/setor', 'AdminController@setor');
+route::get('/cadastrarSetor', 'AdminController@cadastrarSetor');
+route::get('/alterarSetor/{id}', 'AdminController@alterarSetor');
+route::get('/removerSetor/{id}', 'AdminController@removerSetor');
+route::get('/problemas', 'ProblemaController@listProblema');
+route::get('/cadastrarProblema', 'GerenteController@cadastrarProblema');
+route::get('/alterarProblema/{id}', 'GerenteController@alterarProblema');
+route::get('/removerProblema/{id}', 'GerenteController@removerProblema');
+route::get('/cadastrarGerente', 'AdminController@cadastrarGerente');
+route::get('/alterarGerente/{id}', 'AdminController@alterarGerente');
+route::get('/removerGerente/{id}', 'AdminController@removerGerente');
+route::get('/tecnicos', 'TecnicoController@listTecnicos');
+route::get('/cadastarTecnico', 'GerenteController@cadastrarTecnico');
+route::get('/alterarTecnico/{id}', 'GerenteController@alterarTecnico');
+route::get('/removerTecnico/{id}', 'GerenteController@removerTecnico');
+route::get('/encaminharChamado/{id}', 'TecnicoController@encaminharChamado');
+route::get('/alterarSituacao/{chamado}/{situacao}', 'TecnicoController@alterarSituacao');
+route::get('/atenderChamado/{id}/{tecnico}', 'TecnicoController@atenderChamado');
+
+//usuario
 route::post('/cadastrarChamado', 'UsuarioController@cadastrarChamado');
 route::get('/chamado/{id}', 'UsuarioController@buscarChamado');
-route::get('/alterarChamado', 'UsuarioController@alterarChamado');
-route::get('/cancelarChamado/{id}', 'UsuarioController@cancelarChamado');
+route::put('/alterarChamado/{id}', 'UsuarioController@alterarChamado');
+route::delete('/cancelarChamado/{id}', 'UsuarioController@cancelarChamado');

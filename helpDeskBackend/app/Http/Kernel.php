@@ -41,6 +41,8 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \App\Http\Middleware\AuthBasic::class,
+            // \App\http\Middleware\AuthKey::class,
         ],
     ];
 

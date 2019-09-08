@@ -15,7 +15,7 @@ class ChamadoController extends Controller
     }
     public function chamados()
     {
-        return $this->chamado->all();
+        return response()->json($this->chamado->get());
     }
     public function adicionarAlteracao(talteracao $alt, $id, $alteracao)
     {

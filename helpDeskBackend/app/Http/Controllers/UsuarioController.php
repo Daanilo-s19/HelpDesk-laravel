@@ -16,8 +16,7 @@ class UsuarioController extends Controller
 
     public function cadastrarChamado(Request $request)
     {
-
-        dd($request->all());
+        return response()->json($this->chamado->create($request->all()), 201);
 
         /*$insert = $this->chamado->create([
             'descricao' => 'que funcione, amém ',
@@ -31,7 +30,12 @@ class UsuarioController extends Controller
     }
     public function buscarChamado($id)
     {
-        return $this->chamado->where('id_usuario', $id)->get();
+        $searchCalled =  $this->chamado->where('id_usuario', $id)->get();
+        if (!is_null($searchCalled))
+            return  response()->json($searchCalled, 200);
+        else
+            return  response()->json('Not found', 404);
+        /*return $this->chamado->where('id_usuario', $id)->get();*/
         //find retorna apenas pelo ID
         //WHERE retorna pela coluna desejada
     }
@@ -48,9 +52,14 @@ class UsuarioController extends Controller
             'id_setor' => 1
         ]);
     }*/
-    public function cancelarChamado($id)
+    public function alterarChamado(Request $request, $id)
     {
-        $delete = $this->chamado->find($id)->delete();
+        return response()->json($this->chamado->find($id)->update($request->all()), 200);
+    }
+    public function cancelarChamado(Request $request, $id)
+    {
+
+        return response()->json($this->chamado->find($id)->delete(), 204);
     }
 
     //
