@@ -21,54 +21,55 @@ class AdminController extends Controller
     {
         return $this->setor->all();
     }
-    public function cadastrarSetor()
+
+
+    public function cadastrarSetor(Request $request)
     {
-        $this->setor->create([
-            'nome' => 'comunicação',
-            'telefone' => '7778777',
-            'email' => 'fake@hotmail.com',
-        ]);
+        if ($request->all())
+            return response()->json($this->setor->create($request->all()), 201);
+        else
+            return response()->json('Error', 401);
     }
-    public function alterarSetor($id)
+
+
+    public function alterarSetor(Request $request, $id)
     {
-        $this->setor->find($id)->update([
-            'nome' => 'alterado',
-            'telefone' => 'alt9898998',
-            'email' => 'alterado@hotmail.com',
-        ]);
+        if ($request->all())
+            return response()->json($this->setor->find($id)->update($request->all()), 200);
+        else
+            return response()->json('Not data', 401);
     }
+
+
     public function removerSetor($id)
     {
-
-        $this->setor->find($id)->delete();
+        return response()->json($this->setor->find($id)->delete(), 200);
     }
-    public function cadastrarGerente()
+
+
+
+    public function cadastrarGerente(Request $request)
     {
-        $this->tecnico->create([
-            'login' => 'fakedna',
-            'nome' => 'dandan',
-            'email' => 'dandan@hotmail.com',
-            'telefone' => '989899989',
-            'id_setor' => 3,
-            'cargo' => 't',
 
-        ]);
+        if ($request->all())
+            return response()->json($this->tecnico->create($request->all()), 201);
+        else
+            return response()->json('Error', 401);
     }
-    public function alterarGerente($id)
+
+
+    public function alterarGerente(Request $request, $id)
     {
-        $this->tecnico->where('login', $id)->update([
-            'login' => 'delete',
-            'nome' => 'dandan',
-            'email' => 'aaa@hotmail.com',
-            'telefone' => '989899989',
-            'id_setor' => 3,
-            'cargo' => 't',
-
-        ]);
+        if ($request->all())
+            return response()->json($this->tecnico->where('login', $id)->update($request->all()), 200);
+        else
+            return response()->json('Not data', 401);
     }
+
+
     public function removerGerente($id)
     {
-        $this->tecnico->where('login', $id)->delete();
+        return response()->json($this->tecnico->where('login', $id)->delete(), 200);
     }
     //
 }

@@ -13,25 +13,34 @@ class TecnicoController extends Controller
 {
     public function listTecnicos(ttecnico $tecnico)
     {
-        return $tecnico->all();
+        return response()->json($tecnico->all(), 200);
     }
-    public function encaminharChamado(tchamado $chamado, $id)
+
+
+    public function encaminharChamado(Request $request, tchamado $chamado, $idChamado)
     {
-        $chamado->find($id)->update([
-            'id_setor' => tsetor::all()->random()->id,
-        ]);
+        if ($request->id_setor)
+            return response()->json($chamado->find($idChamado)->update($request->all()), 200);
+        else
+            return response()->json('Not data', 401);
     }
-    public function alterarSituacao(talteracao $alteracao, $chamado, $situacao)
+
+
+    public function alterarSituacao(Request $request, talteracao $alteracao, $chamado)
     {
-        $alteracao->where('id_chamado', $chamado)->update([
-            'id_situacao' => $situacao,
-        ]);
+        if ($request->id_situacao)
+            return response()->json($alteracao->where('id_chamado', $chamado)->update($request->all()), 200);
+        else
+            return response()->json('Not data', 401);
     }
-    public function atenderChamado(tchamado $chamado, $id, $tecnico)
+
+
+    public function atenderChamado(Request $request, tchamado $chamado, $idChamado)
     {
-        $chamado->find($id)->update([
-            'id_tecnico' => $tecnico,
-        ]);
+        if ($request->id_tecnico)
+            return response()->json($chamado->find($idChamado)->update($request->all()), 200);
+        else
+            return response()->json('Without changes', 401);
     }
 
     //

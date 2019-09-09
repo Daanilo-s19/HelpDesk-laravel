@@ -16,54 +16,49 @@ class GerenteController extends Controller
         $this->problema = $problema;
     }
 
-    public function cadastrarProblema()
+    public function cadastrarProblema(Request $request)
     {
-        $this->problema->create([
-            'descricao' => ' pmeu problema é a vida',
-            'id_setor' => '4',
-
-        ]);
+        if ($request->all())
+            return response()->json($this->problema->create($request->all(), 200));
+        else
+            return response()->json('with data', 404);
     }
-    public function alterarProblema($id)
+
+
+    public function alterarProblema(Request $request, $id)
     {
-        $this->problema->find($id)->update([
-            'descricao' => 'jesus',
-            'id_setor' => '4',
-
-        ]);
+        return response()->json($this->problema->find($id)->update($request->all()), 200);
     }
+
+
     public function removerProblema($id)
     {
-        $this->problema->find($id)->delete();
+        return response()->json($this->problema->find($id)->delete(), 200);
     }
-    public function cadastrarTecnico()
-    {
-        $this->tecnico->create([
-            'login' => 'tec',
-            'nome' => 'dandan',
-            'email' => 'tec@hotmail.com',
-            'telefone' => '989899989',
-            'id_setor' => 3,
-            'cargo' => 't',
 
-        ]);
-    }
-    public function alterarTecnico($id)
-    {
-        $this->tecnico->where('login', $id)->update([
-            'login' => 'delete',
-            'nome' => 'd',
-            'email' => 'aaad@hotmail.com',
-            'telefone' => '989899989',
-            'id_setor' => 3,
-            'cargo' => 't',
 
-        ]);
+    public function cadastrarTecnico(Request $request)
+    {
+        if ($request->all())
+            return response()->json($this->tecnico->create($request->all(), 200));
+        else
+            return response()->json($request->all(), 401);
     }
+
+
+    public function alterarTecnico(Request $request, $id)
+    {
+        if ($request->all())
+            return response()->json($this->tecnico->where('login', $id)->update($request->all()), 200);
+        else
+            return response()->json('Not data', 401);
+    }
+
+
 
     public function removerTecnico($id)
     {
-        $this->tecnico->where('login', $id)->delete();
+        return response()->json($this->tecnico->where('login', $id)->delete(), 200);
     }
     //
 }

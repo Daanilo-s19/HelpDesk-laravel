@@ -9,7 +9,7 @@ class ProblemaController extends Controller
 {
     public function listProblema(tproblema $problema)
     {
-        return $problema->all();
+        return response()->json($problema->all(), 200);
     }
     //
 }
