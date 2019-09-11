@@ -19,7 +19,7 @@ class AdminController extends Controller
 
     public function setor()
     {
-        return $this->setor->all();
+        return $this->setor->get('nome');
     }
 
 

@@ -23,18 +23,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 route::get('/chamados', 'ChamadoController@chamados');
-route::get('/setor', 'AdminController@setor');
+route::get('/setor/read', 'AdminController@setor');
 route::get('/problemas', 'ProblemaController@listProblema');
 route::get('/tecnicos', 'TecnicoController@listTecnicos');
-route::get('/chamado/{id_usuario}', 'UsuarioController@buscarChamado');
 
-
+route::post('/chamado/read', 'UsuarioController@buscarChamado');
 route::post('/cadastrarProblema', 'GerenteController@cadastrarProblema');
 route::post('/cadastrarGerente', 'AdminController@cadastrarGerente');
 route::post('/cadastrarTecnico', 'GerenteController@cadastrarTecnico');
 route::post('/encaminharChamado/{idChamado}', 'TecnicoController@encaminharChamado');
 route::post('/atenderChamado/{idChamado}', 'TecnicoController@atenderChamado');
-route::post('/cadastrarChamado', 'UsuarioController@cadastrarChamado');
+route::post('/chamado/create', 'UsuarioController@cadastrarChamado');
 route::post('/alteracoesChamado/{idchamado}', 'ChamadoController@adicionarAlteracao'); // pq mesmo?
 route::post('/cadastrarSetor', 'AdminController@cadastrarSetor');
 
