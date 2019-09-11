@@ -12,7 +12,7 @@ class problemaSeeder extends Seeder
      */
     public function run()
     {
-        factory(tproblema::class, 10)->create();
+        factory(tproblema::class, 30)->create();
         //
     }
 }

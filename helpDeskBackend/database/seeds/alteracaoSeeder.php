@@ -12,7 +12,7 @@ class alteracaoSeeder extends Seeder
      */
     public function run()
     {
-        factory(talteracao::class, 10)->create();
+        factory(talteracao::class, 30)->create();
         //
     }
 }

@@ -12,7 +12,7 @@ class situacaoSeeder extends Seeder
      */
     public function run()
     {
-        factory(tsituacao::class, 10)->create();
+        factory(tsituacao::class, 30)->create();
 
         //
     }

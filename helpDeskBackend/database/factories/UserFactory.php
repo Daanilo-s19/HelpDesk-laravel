@@ -44,9 +44,10 @@ $factory->define(tsetor::class, function (Faker $faker) {
 });
 $factory->define(tusuario::class, function (Faker $faker) {
     return [
-        'cpf' => $faker->numberBetween(1000000000, 9999999999),
+        'cpf' => $faker->numberBetween(10000000000, 99999999999),
         'telefone' => $faker->numberBetween(80000000000, 99999999999),
         'email' =>  $faker->unique()->safeEmail,
+        'nome' => $faker->name,
     ];
 });
 $factory->define(ttecnico::class, function (Faker $faker) {
@@ -56,7 +57,8 @@ $factory->define(ttecnico::class, function (Faker $faker) {
         'telefone' => $faker->numberBetween(80000000000, 99999999999),
         'email' =>  $faker->unique()->safeEmail,
         'id_setor' => tsetor::all()->random()->id,
-        'cargo' => $faker->randomElement($array = array('a', 'g', 't')),
+        'cargo' => $faker->randomElement($array = array('A', 'G')),
+        'senha' => $faker->password,
     ];
 });
 $factory->define(tproblema::class, function (Faker $faker) {
@@ -76,20 +78,21 @@ $factory->define(tchamado::class, function (Faker $faker) {
         'id_tecnico' => ttecnico::all()->random()->login,
         'id_usuario' => tusuario::all()->random()->cpf,
         'id_setor' => tsetor::all()->random()->id,
-
+        'id_problema' => tproblema::all()->random()->id,
     ];
 });
+/*
 $factory->define(tcor::class, function (Faker $faker) {
     return [
         'hex' => $faker->hexcolor,
 
     ];
-});
+});*/
 
 $factory->define(tsituacao::class, function (Faker $faker) {
     return [
         'nome' => $faker->randomElement($array = array('aberto', 'fechado', 'pendente', 'em aguardo')),
-        'id_cor' => tcor::all()->random()->id,
+        'cor' => $faker->hexcolor,
 
     ];
 });

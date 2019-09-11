@@ -12,7 +12,7 @@ class chamadoSeeder extends Seeder
      */
     public function run()
     {
-        factory(tchamado::class, 10)->create();
+        factory(tchamado::class, 30)->create();
 
         //
     }

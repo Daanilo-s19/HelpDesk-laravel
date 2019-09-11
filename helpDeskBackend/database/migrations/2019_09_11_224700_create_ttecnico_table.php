@@ -14,12 +14,13 @@ class CreateTtecnicoTable extends Migration {
 	{
 		Schema::create('ttecnico', function(Blueprint $table)
 		{
-			$table->string('login', 20)->primary();
+			$table->string('login', 60)->primary();
 			$table->string('nome', 80);
 			$table->string('email', 80)->unique('ttecnico_email_uindex');
 			$table->string('telefone', 11)->nullable();
-			$table->integer('id_setor')->index('ttecnico_tsetor_id_fk');
-			$table->char('cargo', 1)->nullable();
+			$table->integer('id_setor')->nullable()->index('ttecnico_tsetor_id_fk');
+			$table->enum('cargo', array('A','G'))->nullable();
+			$table->string('senha', 100);
 		});
 	}
 

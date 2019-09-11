@@ -14,7 +14,7 @@ class AddForeignKeysToTchamadoTable extends Migration
     public function up()
     {
         Schema::table('tchamado', function (Blueprint $table) {
-
+            $table->foreign('id_problema', 'tchamado_tproblema_id_fk')->references('id')->on('tproblema')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('id_setor', 'tchamado_tsetor_id_fk')->references('id')->on('tsetor')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('id_tecnico', 'tchamado_ttecnico_login_fk')->references('login')->on('ttecnico')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreign('id_usuario', 'tchamado_tusuario_cpf_fk')->references('cpf')->on('tusuario')->onUpdate('CASCADE')->onDelete('CASCADE');
@@ -30,6 +30,7 @@ class AddForeignKeysToTchamadoTable extends Migration
     public function down()
     {
         Schema::table('tchamado', function (Blueprint $table) {
+            $table->dropForeign('tchamado_tproblema_id_fk');
             $table->dropForeign('tchamado_tsetor_id_fk');
             $table->dropForeign('tchamado_ttecnico_login_fk');
             $table->dropForeign('tchamado_tusuario_cpf_fk');

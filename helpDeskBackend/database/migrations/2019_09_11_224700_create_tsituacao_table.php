@@ -16,7 +16,7 @@ class CreateTsituacaoTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->string('nome', 20);
-			$table->integer('id_cor')->index('tsituacao_tcor_id_fk');
+			$table->string('cor', 6);
 		});
 	}
 

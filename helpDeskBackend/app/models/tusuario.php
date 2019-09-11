@@ -9,6 +9,6 @@ class tusuario extends Model
     protected $table = 'tusuario';
     public $timestamps = false;
 
-    protected $fillable = ['cpf', 'email', 'telefone'];
+    protected $fillable = ['cpf', 'email', 'telefone', 'nome'];
     //
 }

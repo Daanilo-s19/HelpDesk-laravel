@@ -12,7 +12,7 @@ class ttecnicoSeeder extends Seeder
      */
     public function run()
     {
-        factory(ttecnico::class, 20)->create();
+        factory(ttecnico::class, 30)->create();
         //
     }
 }

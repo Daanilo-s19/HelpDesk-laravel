@@ -12,7 +12,7 @@ class setorSeeder extends Seeder
      */
     public function run()
     {
-        factory(tsetor::class, 10)->create();
+        factory(tsetor::class, 30)->create();
         //
     }
 }

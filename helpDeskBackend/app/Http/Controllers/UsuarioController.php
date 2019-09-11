@@ -55,8 +55,6 @@ class UsuarioController extends Controller
                     ->where('id_chamado', $chamado->id)
                     ->orderBy('tsituacao.id')->get()->first(),
                 'situacao' =>   $sit ?   $sit : '',
-
-
             ]);
         }
         if ($request->id_usuario)
@@ -64,7 +62,49 @@ class UsuarioController extends Controller
         else
             return  response()->json('Achei nao pvt', 404);
     }
+    public function detalharChamado(Request $request)
+    {
+        $called = [];
+        $information = DB::table('tchamado')
+            ->join('tusuario', 'tchamado.id_usuario', '=', 'tusuario.cpf')
+            ->join('tsetor', 'tchamado.id_setor', '=', 'tsetor.id')
+            ->join('talteracao', 'tchamado.id', '=', 'talteracao.id_chamado')
+            ->join('tsituacao', 'talteracao.id_situacao', '=', 'tsituacao.id')
+            ->select(
+                'tusuario.email as email',
+                'tsetor.nome as setor',
+                'tchamado.data as data',
+                'tsituacao.nome as situacao'
+            )
+            ->orderBy('talteracao.id', 'desc')
+            ->where('tchamado.id', $request->id)->get()->first();
 
+        $log = DB::table('talteracao')
+            ->join('tsituacao', 'tsituacao.id', '=', 'talteracao.id_situacao')
+            ->join('tprioridade', 'talteracao.id_prioridade', '=', 'tprioridade.id')
+            ->select(
+                'talteracao.descricao as descricao',
+                'talteracao.data as data',
+                'talteracao.id_tecnico as tecnico',
+                'tsituacao.nome as situacao',
+                'tprioridade.descricao as prioridade'
+            )
+            ->where('id_chamado', $request->id)->get();
+
+        $calledInformation = $information ? $information : DB::table('tchamado')
+            ->join('tusuario', 'tchamado.id_usuario', '=', 'tusuario.cpf')
+            ->join('tsetor', 'tchamado.id_setor', '=', 'tsetor.id')
+            ->select(
+                'tusuario.email as email',
+                'tsetor.nome as setor',
+                'tchamado.data as data'
+            )->where('tchamado.id', $request->id)->get()->first();
+        array_push($called, ['chamado' => $calledInformation, 'movimentacao' => $log]);
+        if ($request->id)
+            return response()->json($called, 200);
+        else
+            return  response()->json('Achei nao pvt', 404);
+    }
 
 
     public function alterarChamado(Request $request, $id)

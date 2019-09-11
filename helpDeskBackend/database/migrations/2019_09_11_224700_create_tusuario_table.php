@@ -17,6 +17,7 @@ class CreateTusuarioTable extends Migration {
 			$table->string('cpf', 11)->primary();
 			$table->string('email', 80)->unique('tuser_email_uindex');
 			$table->string('telefone', 11)->nullable();
+			$table->string('nome', 80);
 		});
 	}
 

@@ -8,7 +8,7 @@ class ttecnico extends Model
 {
     protected $table = 'ttecnico';
     public $timestamps = false;
-    protected $fillable = ['login', 'nome', 'email', 'telefone', 'id_setor', 'cargo'];
+    protected $fillable = ['login', 'nome', 'email', 'telefone', 'id_setor', 'cargo', 'senha'];
 
 
     //

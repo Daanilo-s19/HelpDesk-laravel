@@ -28,6 +28,7 @@ route::get('/problemas', 'ProblemaController@listProblema');
 route::get('/tecnicos', 'TecnicoController@listTecnicos');
 
 route::post('/chamado/read', 'UsuarioController@buscarChamado');
+route::post('/chamado/called', 'UsuarioController@detalharChamado');
 route::post('/cadastrarProblema', 'GerenteController@cadastrarProblema');
 route::post('/cadastrarGerente', 'AdminController@cadastrarGerente');
 route::post('/cadastrarTecnico', 'GerenteController@cadastrarTecnico');

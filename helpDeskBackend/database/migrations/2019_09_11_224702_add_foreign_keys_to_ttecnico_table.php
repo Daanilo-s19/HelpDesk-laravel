@@ -14,7 +14,7 @@ class AddForeignKeysToTtecnicoTable extends Migration
     public function up()
     {
         Schema::table('ttecnico', function (Blueprint $table) {
-            $table->foreign('id_setor', 'ttecnico_tsetor_id_fk')->references('id')->on('tsetor')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_setor', 'ttecnico_tsetor_id_fk')->references('id')->on('tsetor')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
