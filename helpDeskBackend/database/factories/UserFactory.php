@@ -57,7 +57,7 @@ $factory->define(ttecnico::class, function (Faker $faker) {
         'telefone' => $faker->numberBetween(80000000000, 99999999999),
         'email' =>  $faker->unique()->safeEmail,
         'id_setor' => tsetor::all()->random()->id,
-        'cargo' => $faker->randomElement($array = array('A', 'G')),
+        'cargo' => $faker->randomElement($array = array('A', 'G',null)),
         'senha' => $faker->password,
     ];
 });
