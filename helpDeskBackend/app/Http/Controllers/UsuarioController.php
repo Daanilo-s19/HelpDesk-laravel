@@ -16,23 +16,76 @@ class UsuarioController extends Controller
     private $alteracao;
     private $setor;
     private $situacao;
-    public function __construct(tchamado $chamado, talteracao $alteracao, tsetor $setor, tsituacao $situacao)
+    private $usuario;
+    public function __construct(tchamado $chamado, talteracao $alteracao, tsetor $setor, tsituacao $situacao, tusuario $tusuario)
     {
         $this->chamado = $chamado;
         $this->alteracao = $alteracao;
         $this->setor = $setor;
         $this->situacao = $situacao;
+        $this->usuario = $tusuario;
     }
 
 
 
     public function cadastrarChamado(Request $request)
     {
+        $now = new \DateTime();
+        $usuarioValidate = $this->usuario->where('cpf', '=', $request->cpf)
+            ->orWhere('email', '=', $request->email)->get();
 
-        if ($request->all())
-            return response()->json($this->chamado->create($request->all()), 201);
-        else
-            return response()->json('Error', 404);
+        if (count($usuarioValidate) != 0) {
+            $called = [
+                'descricao' => $request->descricao,
+                'ti' =>  $request->ti,
+                'id_usuario' => $this->usuario->where('cpf', $request->cpf)
+                    ->orWhere('email', $request->email)->get()->max('cpf'),
+                'id_setor' => $this->setor->where('nome', $request->setor)->get()->max('id'),
+                'id_problema' => $request->problema,
+            ];
+            response()->json($this->chamado->create($called), 200);
+            $calledAlt = [
+                'id_chamado' => $this->chamado->get()->max('id'),
+                'descricao' => DB::table('tproblema')
+                    ->where('id', $request->problema)->select('descricao')->get()->max('descricao'),
+                'id_situacao' => 25, //Aberto
+                'id_usuario' => $this->usuario->where('cpf', $request->cpf)
+                    ->orWhere('email', $request->email)->get()->max('cpf'),
+
+            ];
+
+            return response()->json($this->alteracao->create($calledAlt), 200);
+        } else {
+            $user = [
+                'cpf' => $request->cpf,
+                'nome' =>  $request->nome,
+                'email' => $request->email,
+                'telefone' => $request->telefone,
+            ];
+            response()->json($this->usuario->create($user), 200);
+            $called = [
+                'descricao' => $request->descricao,
+                'ti' =>  $request->ti,
+                'data' => $now,
+                'tombo' => null,
+                'id_tecnico' => null,
+                'id_usuario' => $request->cpf,
+                'id_setor' => $this->setor->where('nome', $request->setor)->get()->max('id'),
+                'id_problema' => $request->problema,
+            ];
+            response()->json($this->chamado->create($called), 200);
+            $calledAlt = [
+                'id_chamado' => $this->chamado->get()->max('id'),
+                'descricao' => DB::table('tproblema')
+                    ->where('id', $request->problema)->select('descricao')->get()->max('descricao'),
+                'id_situacao' => 25, //Aberto
+                'id_usuario' => $this->usuario->where('cpf', $request->cpf)
+                    ->orWhere('email', $request->email)->get()->max('cpf'),
+
+            ];
+
+            return response()->json($this->alteracao->create($calledAlt), 200);
+        }
     }
 
 
