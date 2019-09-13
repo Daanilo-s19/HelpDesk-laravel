@@ -24,7 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 route::get('/chamados', 'ChamadoController@chamados');
 route::get('/setor/read', 'AdminController@setor');
-route::get('/problemas', 'ProblemaController@listProblema');
+route::post('/problema/read', 'ProblemaController@listProblema');
 route::get('/tecnicos', 'TecnicoController@listTecnicos');
 
 route::post('/chamado/read', 'UsuarioController@buscarChamado');
