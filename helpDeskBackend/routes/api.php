@@ -28,25 +28,27 @@ route::post('/problema/read', 'ProblemaController@listProblema');
 route::get('/tecnicos', 'TecnicoController@listTecnicos');
 
 route::post('/chamado/read', 'UsuarioController@buscarChamado');
+route::post('/ChamadoPersonalizado', 'ChamadoController@BuscarPorChamado');
 route::post('/chamado/called', 'UsuarioController@detalharChamado');
 route::post('/cadastrarProblema', 'GerenteController@cadastrarProblema');
 route::post('/cadastrarGerente', 'AdminController@cadastrarGerente');
 route::post('/cadastrarTecnico', 'GerenteController@cadastrarTecnico');
-route::post('/encaminharChamado/{idChamado}', 'TecnicoController@encaminharChamado');
-route::post('/atenderChamado/{idChamado}', 'TecnicoController@atenderChamado');
+route::post('/encaminharChamado', 'TecnicoController@encaminharChamado');
+route::post('/atenderChamado', 'TecnicoController@atenderChamado');
 route::post('/chamado/create', 'UsuarioController@cadastrarChamado');
 route::post('/alteracoesChamado/{idchamado}', 'ChamadoController@adicionarAlteracao'); // pq mesmo?
 route::post('/cadastrarSetor', 'AdminController@cadastrarSetor');
-
+route::post('/definirTombo', 'TecnicoController@definirTombo');
 route::put('/alterarGerente/{id}', 'AdminController@alterarGerente');
 route::put('/alterarProblema/{login}', 'GerenteController@alterarProblema');
-route::put('/alterarSetor/{idSetor}', 'AdminController@alterarSetor'); // melhor rota <3
+route::put('/alterarSetor', 'AdminController@alterarSetor'); // melhor rota <3
 route::put('/alterarTecnico/{id}', 'GerenteController@alterarTecnico');
-route::put('/alterarSituacao/{chamado}', 'TecnicoController@alterarSituacao');
+route::post('/alterarSituacao', 'TecnicoController@alterarSituacao');
+route::post('/informacaoChamado', 'TecnicoController@informacaoChamado');
 route::put('/alterarChamado/{idChamado}', 'UsuarioController@alterarChamado');
 
 route::delete('/removerSetor/{idSetor}', 'AdminController@removerSetor');
-route::delete('/removerProblema/{idProblema}', 'GerenteController@removerProblema');
+route::delete('/removerProblema', 'GerenteController@removerProblema');
 route::delete('/removerGerente/{login}', 'AdminController@removerGerente');
 route::delete('/removerTecnico/{login}', 'GerenteController@removerTecnico');
 route::delete('/cancelarChamado/{idChamado}', 'UsuarioController@cancelarChamado');
